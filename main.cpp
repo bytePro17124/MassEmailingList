@@ -120,6 +120,7 @@ void removeEmail() {
         for (auto it = begin(emailList); it != end(emailList); it++) {
             if (*it == ldr) {
                 emailList.erase(it);
+                simpleClearScreen();
                 cout << ldr << " removed.\n";
             }
         }
