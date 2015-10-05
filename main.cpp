@@ -83,12 +83,20 @@ void action() {
 }
 
 void addEmail() {
-    cout << "Email Address: ";
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    getline(cin, ldr);
-    emailList.push_back(ldr);
-    simpleClearScreen();
-    cout << ldr << " added!\n\n";
+    bool done = false;
+    do {
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        cout << "Email Address: ";
+        getline(cin, ldr);
+        if (ldr != "") {
+            emailList.push_back(ldr);
+            simpleClearScreen();
+            cout << ldr << " added!\n\n";
+            done = true;
+        } else {
+            cout << "Not a valid address.\n\n";
+        }
+    } while (done == false);
 }
 
 void displayEmailList() {
