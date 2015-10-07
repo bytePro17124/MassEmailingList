@@ -55,7 +55,7 @@ void menu() {
          << " 2. View List\n"
          << " 3. Export List to File\n"
          << " 4. Remove Email\n"
-         << " 5. dont use yet - Sort List\n"
+         << " 5. Sort List of emails alphabetically\n"
          << " 6. Save and Quit\n\n";
 }
 
@@ -75,8 +75,9 @@ void action() {
         removeEmail();
         break;
     case 5:
-       // emailList.sort(1, emailList.size());
-        break;
+        sort(emailList.begin(), emailList.end());
+        cout << "\nSort Complete!\n\n";
+	break;
     case 6: save();
     default: exit(1);
     }
@@ -121,23 +122,26 @@ void printListToFile() {
 }
 
 void removeEmail() {
+    bool r_complete = false;
     do {
         cout << "Email to Remove(leave blank to exit): ";
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         getline(cin, ldr);
+	if (ldr == "") r_complete = true;
         for (auto it = begin(emailList); it != end(emailList); it++) {
             if (*it == ldr) {
                 emailList.erase(it);
                 simpleClearScreen();
                 cout << ldr << " removed.\n";
-            }
+            	r_complete = true;
+		}
         }
-    } while (ldr != "");
+    } while (r_complete == false);
 }
 
 void save() {
     ofstream outs;
-    if (loadname == "") cout << "enter name to save as: ";
+    if (loadname == "") cout << "Enter name to save as: ";
     cin >> ldr;
     outs.open((ldr + ".dat").c_str());
     if (outs.is_open()) {
