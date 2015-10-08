@@ -9,27 +9,47 @@ using namespace std;
 
 void load();
 void menu();
-void action();
 void save();
 
 void addEmail();
 void displayEmailList();
 void printListToFile();
 void removeEmail();
+void sortEmail();
 
 static string ldr = "";
 static vector<string> emailList;
 static int choice = 0;
 static string loadname = "";
 
-int main()
-{
+int main() {
     load();
     while (choice != 6) {
         menu();
-        action();
+        choice = getNumber(" Choice(1-6): ", 1, 6);
+        switch (choice) {
+        case 1:
+            addEmail();
+            break;
+        case 2:
+            displayEmailList();
+            break;
+        case 3:
+            printListToFile();
+            break;
+        case 4:
+            removeEmail();
+            break;
+        case 5:
+            sortEmail();
+            break;
+        case 6:
+            save();
+            break;
+        default:
+            cout << "how did you get here?";
+        }
     }
-    save();
     return 0;
 }
 
@@ -39,11 +59,11 @@ void load() {
     cin >> ldr;
     inp.open((ldr + ".dat").c_str());
     if (inp.is_open()) {
+        loadname = ldr;
         while (inp >> ldr) {
             emailList.push_back(ldr);
         }
         cout << "\nLoad successful!\n";
-        loadname = ldr;
         inp.close();
     } else cout << "\nLoad Failed. Starting a New File... \n";
     pressEnterToContinue();
@@ -55,32 +75,8 @@ void menu() {
          << " 2. View List\n"
          << " 3. Export List to File\n"
          << " 4. Remove Email\n"
-         << " 5. Sort List of emails alphabetically\n"
+         << " 5. Sort List\n"
          << " 6. Save and Quit\n\n";
-}
-
-void action() {
-    choice = getNumber(" Choice(1-6): ", 1, 6);
-    switch (choice) {
-    case 1:
-        addEmail();
-        break;
-    case 2:
-        displayEmailList();
-        break;
-    case 3:
-        printListToFile();
-        break;
-    case 4:
-        removeEmail();
-        break;
-    case 5:
-        sort(emailList.begin(), emailList.end());
-        cout << "\nSort Complete!\n\n";
-	break;
-    case 6: save();
-    default: exit(1);
-    }
 }
 
 void addEmail() {
@@ -95,7 +91,7 @@ void addEmail() {
             cout << ldr << " added!\n\n";
             done = true;
         } else {
-            cout << "Not a valid address.\n\n";
+            cout << "No text entered try again.\n\n";
         }
     } while (done == false);
 }
@@ -113,7 +109,7 @@ void printListToFile() {
     ofstream outs;
     outs.open("Latest_Email_List.txt");
     if (outs.is_open()) {
-        for (auto it = begin(emailList); it != end(emailList); it++) {
+        for (auto it = begin(emailList); it != end(emailList); ++it) {
             outs << *it << "; ";
         }
         outs.close();
@@ -123,31 +119,44 @@ void printListToFile() {
 
 void removeEmail() {
     bool r_complete = false;
-    do {
+    while (!r_complete) {
         cout << "Email to Remove(leave blank to exit): ";
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         getline(cin, ldr);
 	if (ldr == "") r_complete = true;
-        for (auto it = begin(emailList); it != end(emailList); it++) {
-            if (*it == ldr) {
-                emailList.erase(it);
-                simpleClearScreen();
-                cout << ldr << " removed.\n";
-            	r_complete = true;
-		}
-        }
-    } while (r_complete == false);
+        else { 
+		for (auto it = begin(emailList); it != end(emailList); it++) {
+            		if (*it == ldr) {
+                  		emailList.erase(it);
+                		simpleClearScreen();
+ 	               		cout << ldr << " removed.\n";
+        	    		r_complete = true;
+	    		}
+        	}
+	}	
+    }
+}
+
+void sortEmail() {
+    sort(emailList.begin(), emailList.end());
+    simpleClearScreen();
+    cout << "Sort Complete!\n\n";
 }
 
 void save() {
     ofstream outs;
-    if (loadname == "") cout << "Enter name to save as: ";
-    cin >> ldr;
-    outs.open((ldr + ".dat").c_str());
+    if (loadname == "") {
+	cout << "Enter name to save as: ";
+        getline(cin, ldr);
+        outs.open((ldr + ".dat").c_str());
+    } else outs.open((loadname + ".dat").c_str());
     if (outs.is_open()) {
         for (auto it = begin(emailList); it != end(emailList); it++) {
-            outs << *it << "\n";
+            outs << *it << endl;
+            cout << *it << " written" << "\n";
         }
-        cout << "Save complete. Unit 5 out. \n";
+        cout << "Save complete.\n";
+        outs.close();
     } else cout << "save failed";
+
 }
