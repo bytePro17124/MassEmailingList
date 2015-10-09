@@ -1,6 +1,6 @@
 # MASS EMAIL LIST 
 
-A simple c++ program designed to help keep track of your mass emailing list. It runs in command line.
+A simple C++ program designed to help keep track of your mass emailing list. It runs in command line.
 
 * Install using 'make' while in the directory.
 * Run using ./emailList
@@ -13,4 +13,4 @@ A simple c++ program designed to help keep track of your mass emailing list. It 
 
 * Written by Matthew Jay Early
 * Email me at matthewjearly@gmail.com
-* Donate to me via bitcoin at 1Nwi1GBJtsuo1WQJqK83Ckr5NDJ3zwi5mM
+* Support this Program by Donating to me via Bitcoin at 1Nwi1GBJtsuo1WQJqK83Ckr5NDJ3zwi5mM
