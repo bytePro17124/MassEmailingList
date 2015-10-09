@@ -144,10 +144,11 @@ void sortEmail() {
 }
 
 void save() {
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     ofstream outs;
     if (loadname == "") {
 	cout << "Enter name to save as: ";
-        getline(cin, ldr);
+        getline(cin, ldr, '\n');
         outs.open((ldr + ".dat").c_str());
     } else outs.open((loadname + ".dat").c_str());
     if (outs.is_open()) {
