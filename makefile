@@ -7,7 +7,7 @@ CC = g++
 all: $(EXES)
 
 clean:
-	rm $(OBJS) $(EXES)
+	rm -rf $(OBJS) $(EXES)
 
 emailList: $(OBJS)
 	$(CC) $(OBJS) $(CPPFLAGS) -o emailList
