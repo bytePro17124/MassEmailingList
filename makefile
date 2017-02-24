@@ -3,11 +3,12 @@ OBJS = main.o helperfunctions.o
 EXES = emailList
 CPPFLAGS = -O -std=c++11
 CC = g++
+DEL = rm -vrf
 
 all: $(EXES)
 
 clean:
-	rm -rf $(OBJS) $(EXES)
+	$(DEL) $(OBJS) $(EXES)
 
 emailList: $(OBJS)
 	$(CC) $(OBJS) $(CPPFLAGS) -o emailList
@@ -15,5 +16,5 @@ emailList: $(OBJS)
 main.o: main.cpp helperfunctions.h
 	$(CC) -c $(CPPFLAGS) main.cpp
 
-helperfunctions: helperfunctions.cpp helperfunctions.h
+helperfunctions.o: helperfunctions.cpp helperfunctions.h
 	$(CC) -c $(CPPFLAGS) helperfunctions.cpp
