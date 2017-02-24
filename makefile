@@ -13,8 +13,11 @@ clean:
 emailList: $(OBJS)
 	$(CC) $(OBJS) $(CPPFLAGS) -o emailList
 
-main.o: main.cpp helperfunctions.h
-	$(CC) -c $(CPPFLAGS) main.cpp
+# main.o: main.cpp helperfunctions.h
+# 	$(CC) -c $(CPPFLAGS) main.cpp
+#
+# helperfunctions.o: helperfunctions.cpp helperfunctions.h
+# 	$(CC) -c $(CPPFLAGS) helperfunctions.cpp
 
-helperfunctions.o: helperfunctions.cpp helperfunctions.h
-	$(CC) -c $(CPPFLAGS) helperfunctions.cpp
+.cpp.o:
+	$(CC) -c $(CPPFLAGS) $< -o $@
