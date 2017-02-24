@@ -10,7 +10,7 @@ clean:
 	rm $(OBJS) $(EXES)
 
 emailList: $(OBJS)
-	$(CC) $(OBJS) -o emailList
+	$(CC) $(OBJS) $(CPPFLAGS) -o emailList
 
 main.o: main.cpp helperfunctions.h
 	$(CC) -c $(CPPFLAGS) main.cpp
