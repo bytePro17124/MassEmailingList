@@ -1,19 +1,11 @@
 # MASS EMAIL LIST 
 
-A simple C++ program designed to help keep track of your mass emailing list. It runs in command line.
-
 ## How to use
 
-* Have a C++ compiler
-* Install using 'make' while in the directory.
-* Run using ./emailList
+1. using command line, clone this repo and go to the directory 
+2. build using ````make```` while in the directory. install any missing dependencies that it complains about and try again if it fails.
+3. run using ````./emailList````
+
 * Use the menu to create an email list. 
 * Export it any time you are ready to mail and copy/past the list into your TO, CC, or BCC field in your email program.
-* Save where you left off with the program and Load back up when you are ready to add more emails. 
-
-
-######About
-
-* Written by Matthew Jay Early
-* Email me at matthewjearly@gmail.com
-* Support this program by donating to me via Bitcoin at 1Nwi1GBJtsuo1WQJqK83Ckr5NDJ3zwi5mM
+* Use the menu options to Save where you left off with the program and Load back up when you are ready to edit your list.
